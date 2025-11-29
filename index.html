@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture de Collection NFT sur WAX - Infographie Interactive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- PALETTE MISE À JOUR : Style Dawn of Victory (Dark/Sci-Fi/Electric Blue) -->
+    <!-- Utilisation de couleurs sombres et d'accents bleu/cyan pour un effet haute technologie. -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dov-dark': '#0D1117', // Presque Noir (Fond principal)
+                        'dov-card': '#161B22', // Fond des panneaux/cartes
+                        'dov-accent': '#00FFFF', // Cyan Électrique (Accent principal / "Hack")
+                        'dov-glow': '#1E90FF', // Bleu Vif (Lueur / Secondaire)
+                        'dov-text': '#F0F6F0', // Blanc cassé pour le texte
+                        'dov-muted': '#8B949E', // Gris pour le texte secondaire
+                        'dov-highlight': '#192C40', // Fond pour éléments de structure (plus foncé que card)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Fond global avec un léger motif sombre pour un aspect technique */
+        body {
+            background-color: #0D1117;
+            color: #F0F6F0;
+            background-image: linear-gradient(rgba(0, 255, 255, 0.02) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            max-height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Panneau "Hacked" : sombre, avec une bordure cyan subtile et un effet de flou */
+        .glass-panel {
+            background: rgba(22, 27, 34, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.1);
+        }
+
+        /* Bordure style "Neon" */
+        .neon-glow {
+            box-shadow: 0 0 15px #00FFFF, 0 0 5px #1E90FF;
+            border: 1px solid #00FFFF;
+        }
+
+        /* Ligne de flux verticale */
+        .flow-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            /* Gradient bleu/cyan futuriste */
+            background: linear-gradient(to bottom, #00FFFF, #1E90FF);
+            z-index: 0;
+        }
+
+        /* Style des boutons d'accent */
+        .btn-accent {
+            background-color: #161B22;
+            color: #00FFFF;
+            border: 1px solid #1E90FF;
+            transition: all 0.3s ease;
+        }
+        .btn-accent:hover {
+            background-color: #192C40;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="py-16 px-4 text-center bg-gradient-to-b from-dov-dark to-dov-card border-b border-dov-glow/20">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block px-4 py-1 mb-4 text-xs font-bold tracking-widest text-dov-accent uppercase border border-dov-accent rounded-full bg-dov-accent/10 neon-glow/50">
+                Architecture Technique
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">
+                Plateforme de Packs NFT sur <span class="text-transparent bg-clip-text bg-gradient-to-r from-dov-accent to-dov-glow">WAX Protocol</span>
+            </h1>
+            <p class="text-xl text-dov-muted leading-relaxed">
+                Déploiement d'une infrastructure complète style "Command & Control" pour la distribution automatisée de collections NFT.
+            </p>
+        </div>
+    </header>
+
+    <!-- Phase 1: Structure Technique -->
+    <section class="py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-dov-text mb-4">Phase 1 : Fondations AtomicAssets (Data Structures)</h2>
+            <p class="text-dov-muted max-w-3xl mx-auto">
+                L'infrastructure WAX requiert une hiérarchie stricte. Cette architecture est le socle de déploiement de tout actif.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <!-- Diagramme Hiérarchique -->
+            <div class="lg:col-span-2 glass-panel rounded-2xl p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fa-solid fa-sitemap text-9xl text-dov-accent"></i>
+                </div>
+                
+                <h3 class="text-xl font-bold text-dov-glow mb-6 border-b border-gray-700 pb-2">Hiérarchie des Données WAX (Définition)</h3>
+                
+                <div class="flex flex-col gap-4">
+                    <!-- Level 1 (Collection) - Base -->
+                    <div class="p-4 bg-dov-highlight border-l-4 border-dov-glow rounded-xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-dov-glow/20 border border-dov-glow flex items-center justify-center text-dov-accent text-xl neon-glow/50">
+                            <i class="fa-solid fa-folder-tree"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dov-text">1. Collection (Container Principal)</h4>
+                            <p class="text-xs text-dov-muted">Le conteneur global (`client-mission-alpha`). Détient les droits et les royalties.</p>
+                        </div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="h-6 w-0.5 bg-dov-glow/50 ml-10"></div>
+
+                    <!-- Level 2 (Schema) - Structure de données -->
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1 p-4 bg-dov-card border-l-4 border-dov-accent/50 rounded-xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-dov-accent/20 border border-dov-accent flex items-center justify-center text-dov-accent">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-dov-text">2. Schéma (Cards Data)</h4>
+                                <p class="text-xs text-dov-muted">Structure des actifs à ouvrir (img, name, rarity, stats).</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4 bg-dov-card border-l-4 border-dov-accent/50 rounded-xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-dov-accent/20 border border-dov-accent flex items-center justify-center text-dov-accent">
+                                <i class="fa-solid fa-box"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-dov-text">2. Schéma (Packs Data)</h4>
+                                <p class="text-xs text-dov-muted">Structure des conteneurs scellés (`treasurechest`).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="h-6 w-0.5 bg-dov-glow/50 ml-10"></div>
+
+                    <!-- Level 3 (Templates) - Assets immuables -->
+                    <div class="p-4 bg-dov-highlight border-l-4 border-dov-glow rounded-xl flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-dov-glow/20 border border-dov-glow flex items-center justify-center text-dov-accent">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-dov-text">3. Templates (Actifs Immuables)</h4>
+                            <p class="text-xs text-dov-muted">Définitions immuables. Un template par niveau de rareté et un pour le Pack, configurés par le client.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte Info: Le Pack -->
+            <div class="glass-panel rounded-2xl p-6 border-t-4 border-dov-accent">
+                <h3 class="text-lg font-bold text-dov-accent mb-3">Protocole du Conteneur Scellé</h3>
+                <p class="text-sm text-dov-muted mb-4">
+                    Le pack NFT est une unité de transfert. Son déverrouillage est une transaction blockchain.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-link text-dov-glow mt-1"></i>
+                        <span class="text-sm text-dov-text"><strong>Acquisition :</strong> L'utilisateur achète l'image de l'emballage (NFT Pack).</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-skull-crossbones text-dov-glow mt-1"></i>
+                        <span class="text-sm text-dov-text"><strong>Ouverture ("Unbox") :</strong> Transaction qui **brûle** le NFT Pack pour **créer (mint)** les NFT Cartes selon les probabilités configurées.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-database text-dov-glow mt-1"></i>
+                        <span class="text-sm text-dov-text"><strong>Stock :</strong> Les cartes sont générées via un "Mint on Demand" ou sont pré-mintées.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 2: Configuration & Rareté -->
+    <section class="py-16 px-4 bg-dov-card/50 border-t border-b border-dov-glow/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dov-text mb-4">Phase 2 : Configuration du Drop (Paramètres Critiques)</h2>
+                <p class="text-dov-muted max-w-3xl mx-auto">
+                    Le client utilise l'interface de contrôle pour définir les règles mathématiques (probabilités, Mint, prix) qui sont le payload de la blockchain.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="bg-dov-dark rounded-2xl p-6 shadow-2xl border border-dov-glow/20">
+                        <h3 class="text-lg font-bold text-dov-accent mb-4 text-center">Simulateur de Taux de Drop</h3>
+                        <div class="chart-container">
+                            <canvas id="dropRateChart"></canvas>
+                        </div>
+                        <div class="mt-6 flex justify-center gap-4">
+                            <!-- Boutons stylisés pour le thème Sci-Fi -->
+                            <button onclick="updateChart('standard')" class="btn-accent px-4 py-2 rounded text-xs font-bold hover:text-white">Pack Standard</button>
+                            <button onclick="updateChart('premium')" class="px-4 py-2 rounded text-xs font-bold bg-dov-glow hover:bg-dov-accent text-dov-dark transition shadow-[0_0_10px_rgba(30,144,255,0.7)]">Pack Élite</button>
+                        </div>
+                        <p class="text-center text-xs text-dov-muted mt-4">
+                            *Visualisation des probabilités de Template (Mint Logic).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="order-1 md:order-2">
+                    <h3 class="text-2xl font-bold text-dov-glow mb-4">Pipeline de Création (Interface de Contrôle)</h3>
+                    <p class="text-dov-muted mb-6">
+                        L'interface capte les paramètres du client pour générer les transactions de déploiement blockchain.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <!-- Utilisation de couleurs de statut Sci-Fi (Bleu pour OK/vert, Rouge pour Alerte/Orange) -->
+                        <div class="flex items-center gap-4 p-4 rounded-lg bg-dov-highlight border border-dov-muted/50">
+                            <div class="w-10 h-10 rounded bg-green-900/50 text-green-400 flex items-center justify-center font-bold border border-green-500">1</div>
+                            <div>
+                                <h4 class="font-bold text-dov-text">Asset Upload & Validation (IPFS)</h4>
+                                <p class="text-xs text-dov-muted">Transmission et validation des illustrations (cartes, pack) et du thème de la vitrine.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-lg bg-dov-highlight border border-dov-muted/50">
+                            <div class="w-10 h-10 rounded bg-dov-glow/50 text-dov-glow flex items-center justify-center font-bold border border-dov-glow">2</div>
+                            <div>
+                                <h4 class="font-bold text-dov-text">Paramètres : Rareté, Prix, Stock (WAXP/Mint)</h4>
+                                <p class="text-xs text-dov-muted">Configuration des règles du Drop (probabilités, prix WAXP, limite de mint total).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-lg bg-dov-highlight border border-dov-muted/50">
+                            <div class="w-10 h-10 rounded bg-red-900/50 text-red-400 flex items-center justify-center font-bold border border-red-500">3</div>
+                            <div>
+                                <h4 class="font-bold text-dov-text">Génération du Payload Blockchain</h4>
+                                <p class="text-xs text-dov-muted">Création automatique des schémas et templates AtomicAssets, en attente de la commande de publication.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 3 & 4: Transaction Flow -->
+    <section class="py-16 px-4 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-dov-text mb-4">Phase 3 & 4 : Protocole d'Achat & Livraison</h2>
+            <p class="text-dov-muted">
+                Détail du processus transactionnel sécurisé, du clic d'achat à la réception de l'actif.
+            </p>
+        </div>
+
+        <div class="relative">
+            <!-- Vertical Line -->
+            <div class="flow-line hidden md:block"></div>
+
+            <div class="space-y-12 relative z-10">
+                <!-- Step 1: Site Web -->
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 md:text-right">
+                        <h3 class="text-xl font-bold text-dov-accent">1. Portail d'Accès (Frontend)</h3>
+                        <p class="text-sm text-dov-muted mt-2">L'utilisateur initie la séquence d'achat en sélectionnant le pack.</p>
+                    </div>
+                    <!-- Icône stylisée "hacked" -->
+                    <div class="w-16 h-16 rounded-full bg-dov-card border-2 border-dov-accent flex items-center justify-center text-2xl text-dov-accent shadow-[0_0_15px_rgba(0,255,255,0.7)]">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pl-8"></div>
+                </div>
+
+                <!-- Step 2: Wallet -->
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 md:text-right hidden md:block"></div>
+                    <!-- Icône stylisée "hacked" -->
+                    <div class="w-16 h-16 rounded-full bg-dov-card border-2 border-dov-accent flex items-center justify-center text-2xl text-dov-accent shadow-[0_0_15px_rgba(0,255,255,0.7)]">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="text-xl font-bold text-dov-accent">2. Authentification & Signature (WAX Wallet)</h3>
+                        <p class="text-sm text-dov-muted mt-2">L'utilisateur approuve la transaction (envoi de WAXP) via son Wallet Cloud ou Anchor.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Blockchain -->
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 md:text-right">
+                        <h3 class="text-xl font-bold text-dov-glow">3. Exécution Contrat (AtomicDrops)</h3>
+                        <!-- Contrat stylisé "hacked" -->
+                        <p class="text-sm text-dov-muted mt-2">Le Smart Contract reçoit les fonds, exécute la vérification de stock et le transfert du NFT "Pack" à l'acheteur.</p>
+                    </div>
+                    <div class="w-16 h-16 rounded-full bg-dov-card border-2 border-dov-glow flex items-center justify-center text-2xl text-dov-glow shadow-[0_0_15px_rgba(30,144,255,0.7)]">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pl-8"></div>
+                </div>
+
+                <!-- Step 4: Asset -->
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 md:text-right hidden md:block"></div>
+                    <!-- Icône de Succès Vert, maintenant plus contrastée avec le fond foncé -->
+                    <div class="w-16 h-16 rounded-full bg-dov-card border-2 border-green-500 flex items-center justify-center text-2xl text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.5)]">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="text-xl font-bold text-green-400">4. Finalisation & Acquisition</h3>
+                        <p class="text-sm text-dov-muted mt-2">Le pack NFT apparaît dans l'inventaire de l'utilisateur, prêt pour la procédure de déverrouillage (unboxing).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 5: Business Model -->
+    <section class="py-20 px-4 bg-gradient-to-t from-dov-dark to-dov-card border-t border-dov-glow/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dov-text mb-4">Phase 5 : Modèles de Déploiement (Systèmes de Vente)</h2>
+                <p class="text-dov-muted">Deux protocoles de livraison pour la vitrine de vente, selon le contrôle souhaité par le client.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Option A - Fichiers Statiques (Légèrement atténué) -->
+                <div class="glass-panel p-8 rounded-2xl border-t-4 border-dov-muted hover:bg-dov-highlight transition duration-300">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-dov-text">Protocole A : Fichiers Statiques</h3>
+                            <p class="text-sm text-dov-muted font-mono">Délivrance Autonome</p>
+                        </div>
+                        <i class="fa-solid fa-file-code text-3xl text-dov-muted"></i>
+                    </div>
+                    <p class="text-dov-muted mb-6 min-h-[80px]">
+                        Livraison d'un package ZIP contenant le frontend de vente pré-configuré. Le client gère l'hébergement et la connexion au Drop.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-dov-muted"><i class="fa-solid fa-circle-check text-green-500"></i> Coût unique (Licence)</li>
+                        <li class="flex items-center gap-2 text-sm text-dov-muted"><i class="fa-solid fa-circle-check text-green-500"></i> Contrôle total de l'infrastructure client</li>
+                        <li class="flex items-center gap-2 text-sm text-dov-muted"><i class="fa-solid fa-circle-xmark text-red-500"></i> Requiert des ressources IT pour le déploiement/maintenance</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-lg border border-dov-muted text-dov-muted hover:bg-dov-card transition">Télécharger le Package</button>
+                </div>
+
+                <!-- Option B - Service Managé (Mise en avant Sci-Fi/Glow) -->
+                <div class="glass-panel p-8 rounded-2xl border-t-4 border-dov-accent hover:bg-dov-highlight transition duration-300 relative overflow-hidden neon-glow/50">
+                    <div class="absolute top-0 right-0 bg-dov-accent text-dov-dark text-xs font-bold px-3 py-1 rounded-bl-lg">SYSTÈME OPTIMAL</div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-dov-text">Protocole B : Service Managé</h3>
+                            <p class="text-sm text-dov-accent font-mono">Déploiement Automatisé SaaS</p>
+                        </div>
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-dov-accent"></i>
+                    </div>
+                    <p class="text-dov-text mb-6 min-h-[80px]">
+                        Déploiement en un clic de l'ensemble (site, thème, configuration) sur notre infrastructure sécurisée.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-dov-text"><i class="fa-solid fa-circle-check text-green-500"></i> Modèle de Revenu Récurrent (Maintenance)</li>
+                        <li class="flex items-center gap-2 text-sm text-dov-text"><i class="fa-solid fa-circle-check text-green-500"></i> Zéro Friction Technique (Mise à jour et support inclus)</li>
+                        <li class="flex items-center gap-2 text-sm text-dov-text"><i class="fa-solid fa-circle-check text-green-500"></i> Monitoring des ventes et des stocks intégré</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-lg bg-gradient-to-r from-dov-glow to-dov-accent text-dov-dark font-bold hover:opacity-90 transition shadow-[0_0_15px_rgba(30,144,255,0.7)]">Activer le Déploiement</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-dov-dark text-center border-t border-dov-glow/20">
+        <p class="text-dov-muted text-sm">© 2024 Architecture Collection WAX. Status : En Ligne. Protocole : Sécurisé.</p>
+    </footer>
+
+    <!-- JavaScript for Charts and Interaction -->
+    <script>
+        // --- Tooltip Config Requirement ---
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                },
+                label: function(context) {
+                    let label = context.label || '';
+                    if (label) {
+                        label += ': ';
+                    }
+                    if (context.parsed !== null) {
+                        label += context.parsed + '%';
+                    }
+                    return label;
+                }
+            }
+        };
+
+        // --- Label Wrapping Logic ---
+        function wrapLabel(label) {
+            if (label.length > 16) {
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    if ((currentLine + " " + words[i]).length <= 16) {
+                        currentLine += " " + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            }
+            return label;
+        }
+
+        // --- Chart Initialization ---
+        let dropRateChart;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('dropRateChart').getContext('2d');
+            
+            // Initial Data (Standard Pack)
+            const dataStandard = [80, 15, 5];
+            const labelsRaw = ["Commun (Base)", "Rare (Intermédiaire)", "Légendaire (Jackpot)"];
+            const labels = labelsRaw.map(wrapLabel);
+
+            dropRateChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dataStandard,
+                        // Couleurs adaptées au thème Sci-Fi : Gris/Muted -> Cyan/Accent -> Bleu/Glow
+                        backgroundColor: [
+                            '#8B949E', // dov-muted (Commun)
+                            '#00FFFF', // dov-accent (Rare)
+                            '#1E90FF'  // dov-glow (Légendaire)
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#F0F6F0', // dov-text
+                                font: { family: 'Inter', size: 12 },
+                                padding: 20
+                            }
+                        },
+                        tooltip: tooltipConfig
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+
+        // --- Interactive Update Logic ---
+        function updateChart(type) {
+            if (!dropRateChart) return;
+
+            if (type === 'standard') {
+                dropRateChart.data.datasets[0].data = [80, 15, 5];
+                dropRateChart.data.datasets[0].backgroundColor = ['#8B949E', '#00FFFF', '#1E90FF'];
+            } else if (type === 'premium') {
+                // Probabilités Premium plus élevées
+                dropRateChart.data.datasets[0].data = [40, 40, 20];
+                // Utilisation de nuances plus vives pour le pack premium
+                dropRateChart.data.datasets[0].backgroundColor = ['#64748B', '#00BFFF', '#4169E1']; 
+            }
+            dropRateChart.update();
+        }
+    </script>
+</body>
+</html>
